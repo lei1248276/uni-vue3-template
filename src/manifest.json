@@ -44,7 +44,8 @@
             "ios" : {},
             /* SDK配置 */
             "sdkConfigs" : {}
-        }
+        },
+        "nvueLaunchMode" : ""
     },
     /* 快应用特有相关 */
     "quickapp" : {},
@@ -65,8 +66,8 @@
     "mp-toutiao" : {
         "usingComponents" : true
     },
-    "uniStatistics": {  
-        "enable": false
+    "uniStatistics" : {
+        "enable" : false
     },
     "vueVersion" : "3"
 }

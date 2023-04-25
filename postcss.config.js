@@ -7,16 +7,5 @@ export default {
       propList: ['*'],
       transformUnit: 'rpx'
     })
-    // ...(process.env.UNI_PLATFORM !== 'h5'
-    //   ? [
-    //     require('postcss-class-rename-postcss8')({
-    //       '\\\\:': '-',
-    //       '\\\\/': '-',
-    //       '\\\\.': '-',
-    //       '\\*': '-'
-    //     })
-    //   ]
-    //   : []
-    // ),
   ]
 }

@@ -9,7 +9,7 @@ import path from 'path'
 export default defineConfig({
   plugins: [
     uni(),
-    uvwt(),
+    ...(process.env.UNI_PLATFORM !== 'app' ? [uvwt()] : []),
     AutoImport({
       imports: [
         'vue',
