@@ -1,5 +1,6 @@
 module.exports = {
   root: true,
+  parser: 'vue-eslint-parser',
   parserOptions: {
     sourceType: 'module',
     ecmaVersion: 'latest'
@@ -15,6 +16,12 @@ module.exports = {
     '@vue/eslint-config-typescript',
     './.eslintrc-auto-import.json'
   ],
+  globals: {
+    UniApp: true,
+    uni: true,
+    getCurrentPages: true,
+    plus: true
+  },
 
   // add your custom rules here
   // it is base on https://github.com/vuejs/eslint-config-vue
@@ -132,7 +139,7 @@ module.exports = {
     'no-self-compare': 2,
     'no-sequences': 2,
     'no-shadow-restricted-names': 2,
-    'no-spaced-func': 2,
+    'no-spaced-func': 0,
     'no-sparse-arrays': 2,
     'no-this-before-super': 2,
     'no-throw-literal': 2,
@@ -184,7 +191,7 @@ module.exports = {
       'nonwords': false
     }],
     'spaced-comment': [2, 'always', {
-      'markers': ['global', 'globals', 'eslint', 'eslint-disable', '*package', '!', ',']
+      'markers': ['/', 'global', 'globals', 'eslint', 'eslint-disable', '*package', '!', ',']
     }],
     'template-curly-spacing': [2, 'never'],
     'use-isnan': 2,
