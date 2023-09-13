@@ -29,7 +29,8 @@ export default defineConfig({
       ],
       dirs: [
         'src/store',
-        'src/hooks/**'
+        'src/hooks/**',
+        'src/utils/**'
       ],
       vueTemplate: true,
       dts: true, // or a custom path
@@ -43,7 +44,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@/': `${path.resolve(__dirname, 'src')}/`
+      '@/': `${path.resolve(__dirname, 'src')}/`,
+      '@img/': `${path.resolve(__dirname, 'src/static/img')}/`
     }
   },
   css: {

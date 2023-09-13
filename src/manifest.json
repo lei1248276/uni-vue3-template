@@ -69,5 +69,12 @@
     "uniStatistics" : {
         "enable" : false
     },
+    "h5": {
+        "optimization": {
+            "treeShaking": {
+                "enable": true
+            }
+        }
+    },
     "vueVersion" : "3"
 }
