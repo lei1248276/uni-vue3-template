@@ -9,9 +9,11 @@
     "types": [
       "@dcloudio/types", 
       "@uni-helper/uni-ui-types",
-      "@uni-helper/uni-app-types", 
-      "@dcloudio/uni-helper-json"
+      "@uni-helper/uni-app-types"
       ]
+  },
+  "vueCompilerOptions": {
+    "nativeTags": ["block", "component", "template", "slot"]
   },
   "include": [
     "src/**/*.ts", 
