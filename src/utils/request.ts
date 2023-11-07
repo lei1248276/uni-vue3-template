@@ -1,6 +1,6 @@
-import Request from './utils/luch-request'
+import Request from './luch-request'
 
-export const BASE_URL = ''
+export const BASE_URL = import.meta.env.VITE_BASE_API
 
 const request = new Request({
   baseURL: BASE_URL
