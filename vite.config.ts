@@ -30,7 +30,7 @@ export default defineConfig({
       dirs: [
         'src/store',
         'src/hooks/**',
-        'src/utils/**'
+        'src/utils'
       ],
       vueTemplate: true,
       dts: true, // or a custom path

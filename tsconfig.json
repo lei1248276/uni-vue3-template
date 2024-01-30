@@ -16,11 +16,11 @@
     "nativeTags": ["block", "component", "template", "slot"]
   },
   "include": [
+    "components.d.ts",
+    "auto-imports.d.ts", 
     "src/**/*.ts", 
     "src/**/*.d.ts", 
-    "src/**/*.vue", 
-    "auto-imports.d.ts", 
-    "components.d.ts"
+    "src/**/*.vue"
   ],
   "exclude": [
     "src/uni_modules", 

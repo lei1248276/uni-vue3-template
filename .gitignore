@@ -11,6 +11,9 @@ node_modules
 .DS_Store
 dist
 *.local
+auto-imports.d.ts
+components.d.ts
+.eslintrc-auto-import.json
 
 # Editor directories and files
 .hbuilderx
