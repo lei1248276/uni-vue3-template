@@ -10,10 +10,10 @@
       "@dcloudio/types", 
       "@uni-helper/uni-ui-types",
       "@uni-helper/uni-app-types"
-      ]
+    ]
   },
   "vueCompilerOptions": {
-    "nativeTags": ["block", "component", "template", "slot"]
+    "plugins": ["@uni-helper/uni-app-types/volar-plugin"]
   },
   "include": [
     "components.d.ts",

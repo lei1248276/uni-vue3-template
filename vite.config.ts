@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
 import { UnifiedViteWeappTailwindcssPlugin as uvwt } from 'weapp-tailwindcss-webpack-plugin/vite'
-import postcss from './postcss.config'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import path from 'path'
@@ -49,7 +48,17 @@ export default defineConfig({
     }
   },
   css: {
-    postcss
+    postcss: {
+      plugins: [
+        require('autoprefixer'),
+        require('tailwindcss'),
+        require('postcss-rem-to-responsive-pixel')({
+          rootValue: 32,
+          propList: ['*'],
+          transformUnit: 'rpx'
+        })
+      ]
+    }
   },
   esbuild: {
     drop: isProd ? ['console', 'debugger'] : []

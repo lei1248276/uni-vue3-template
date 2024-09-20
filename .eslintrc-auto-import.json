@@ -132,6 +132,10 @@
     "useNavigateTo": true,
     "useSessionCache": true,
     "useStatusBarHeight": true,
-    "validatePhone": true
+    "validatePhone": true,
+    "onWatcherCleanup": true,
+    "useId": true,
+    "useModel": true,
+    "useTemplateRef": true
   }
 }
