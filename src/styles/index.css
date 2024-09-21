@@ -22,8 +22,9 @@
 
 @layer base {
   page{
-    --save-bottom: calc(150rpx + env(safe-area-inset-bottom));
-    --ios-bottom: env(safe-area-inset-bottom);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+    --save-bottom: calc(150rpx + var(--safe-area-inset-bottom, 0px));
+    --ios-bottom: var(--safe-area-inset-bottom, 0px);
 
     width: 100%;
     height: 100%;
