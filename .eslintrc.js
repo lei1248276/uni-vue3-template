@@ -20,7 +20,8 @@ module.exports = {
     UniApp: true,
     uni: true,
     getCurrentPages: true,
-    plus: true
+    plus: true,
+    UniHelper: true
   },
 
   // add your custom rules here
@@ -110,10 +111,7 @@ module.exports = {
     'no-irregular-whitespace': 2,
     'no-iterator': 2,
     'no-label-var': 2,
-    'no-labels': [2, {
-      'allowLoop': false,
-      'allowSwitch': false
-    }],
+    'no-unused-labels': 0,
     'no-lone-blocks': 2,
     'no-mixed-spaces-and-tabs': 2,
     'no-multi-spaces': 2,
