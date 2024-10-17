@@ -2,7 +2,7 @@ import pluginVue from 'eslint-plugin-vue'
 import vueTsEslintConfig from '@vue/eslint-config-typescript'
 import vueParser from 'vue-eslint-parser'
 import tsParser from '@typescript-eslint/parser'
-import autoImportConfig from './.eslintrc-auto-import.json' assert { type: 'json' }
+import autoImportConfig from './.eslintrc-auto-import.json' with { type: 'json' }
 
 export default [
   ...pluginVue.configs['flat/essential'],
