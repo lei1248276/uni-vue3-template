@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import { defineConfig } from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
 import { UnifiedViteWeappTailwindcssPlugin as uvwt } from 'weapp-tailwindcss-webpack-plugin/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import path from 'path'
+import PagesJsonTypes from './plugins/vite-plugin-pages-json-types'
 
 const isH5 = process.env.UNI_PLATFORM === 'h5'
 const app = process.env.UNI_PLATFORM === 'app'
@@ -13,6 +15,7 @@ const isProd = process.env.NODE_ENV === 'production'
 export default defineConfig({
   base: './',
   plugins: [
+    PagesJsonTypes(),
     uni(),
     ...(isH5 || app ? [] : [uvwt()]),
     AutoImport({
