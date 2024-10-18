@@ -122,6 +122,7 @@ declare global {
   const useLazyData: typeof import('./src/hooks/useLazyData')['default']
   const useLocation: typeof import('./src/hooks/useLocation')['default']
   const useModel: typeof import('vue')['useModel']
+  const useNavigate: typeof import('./src/hooks/useNavigate')['default']
   const useNavigateTo: typeof import('./src/hooks/useNavigateTo')['default']
   const useSessionCache: typeof import('./src/hooks/useSessionCache')['default']
   const useSlots: typeof import('vue')['useSlots']
@@ -230,14 +231,12 @@ declare module 'vue' {
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
-    readonly useCache: UnwrapRef<typeof import('./src/hooks/useCache')['default']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
     readonly useLocation: UnwrapRef<typeof import('./src/hooks/useLocation')['default']>
     readonly useModel: UnwrapRef<typeof import('vue')['useModel']>
-    readonly useNavigateTo: UnwrapRef<typeof import('./src/hooks/useNavigateTo')['default']>
-    readonly useSessionCache: UnwrapRef<typeof import('./src/hooks/useSessionCache')['default']>
+    readonly useNavigate: UnwrapRef<typeof import('./src/hooks/useNavigate')['default']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useStatusBarHeight: UnwrapRef<typeof import('./src/hooks/useStatusBarHeight')['default']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
