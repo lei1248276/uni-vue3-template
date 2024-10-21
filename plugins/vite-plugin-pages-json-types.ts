@@ -18,20 +18,28 @@ export default function PagesJsonTypes(): Plugin {
           if (err) return console.error('读取 pages.json 文件失败:', err)
 
           try {
-            const json = JSON.parse(data)
+            let json
+            try {
+              json = JSON.parse(data)
+            } catch {
+              // 使用正则表达式去除所有注释（单行和多行）
+              json = JSON.parse(data.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, ''))
+            }
+
             const pages = json.pages.map((page) => '/' + page.path)
             const subPackagesPages = json.subPackages?.reduce((acc, cur) => {
               cur.pages.forEach((page) => { acc.push('/' + join(cur.root, page.path)) })
               return acc
             }, []) || []
             const tabBarPages = json.tabBar?.list.map((item) => '/' + item.pagePath) || []
-            const tsContent = 'export type Pages = ' +
+            const dtsContent =
+              'export type Pages = ' +
               JSON.stringify(pages.concat(subPackagesPages), null, 2) +
               '\n' +
               'export type TabBarPages = ' +
               JSON.stringify(tabBarPages, null, 2)
 
-            writeFile(dtsFilePath, tsContent, 'utf-8', (err) => {
+            writeFile(dtsFilePath, dtsContent, 'utf-8', (err) => {
               if (err) console.error('写入 pages.d.ts 文件失败:', err)
             })
           } catch (error) {
