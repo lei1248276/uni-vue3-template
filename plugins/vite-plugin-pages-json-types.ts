@@ -46,7 +46,8 @@ export default function PagesJsonTypes(): Plugin {
               if (err) console.error('写入 pages.d.ts 文件失败:', err)
             })
           } catch (error) {
-            console.error('pages.json 文件格式错误:', error)
+            console.error('\x1b[31m%s\x1b[0m', '[vite-plugin-pages-json-types]: pages.json File format error')
+            console.error('\x1b[31m%s\x1b[0m', error)
           }
         })
       }
