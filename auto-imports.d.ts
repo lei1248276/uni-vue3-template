@@ -8,52 +8,30 @@ export {}
 declare global {
   const BASE_URL: typeof import('./src/utils/request')['BASE_URL']
   const EffectScope: typeof import('vue')['EffectScope']
-  const InterceptorManager: typeof import('./src/utils/luch-request/core/InterceptorManager.js')['default']
-  const Request: typeof import('./src/utils/luch-request/core/Request.js')['default']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
-  const adapters: typeof import('./src/utils/luch-request/adapters/index.js')['default']
-  const buildFullPath: typeof import('./src/utils/luch-request/core/buildFullPath.js')['default']
-  const buildURL: typeof import('./src/utils/luch-request/helpers/buildURL.js')['default']
-  const clone: typeof import('./src/utils/luch-request/utils/clone.js')['default']
-  const combineURLs: typeof import('./src/utils/luch-request/helpers/combineURLs.js')['default']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const createPinia: typeof import('pinia')['createPinia']
   const customRef: typeof import('vue')['customRef']
-  const deepMerge: typeof import('./src/utils/luch-request/utils.js')['deepMerge']
-  const defaults: typeof import('./src/utils/luch-request/core/defaults.js')['default']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
   const defineStore: typeof import('pinia')['defineStore']
-  const dispatchRequest: typeof import('./src/utils/luch-request/core/dispatchRequest.js')['default']
   const effectScope: typeof import('vue')['effectScope']
-  const forEach: typeof import('./src/utils/luch-request/utils.js')['forEach']
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const h: typeof import('vue')['h']
-  const indexD: typeof import('./src/utils/luch-request/index.d')['default']
   const inject: typeof import('vue')['inject']
-  const isAbsoluteURL: typeof import('./src/utils/luch-request/helpers/isAbsoluteURL.js')['default']
-  const isArray: typeof import('./src/utils/luch-request/utils.js')['isArray']
-  const isBoolean: typeof import('./src/utils/luch-request/utils.js')['isBoolean']
-  const isDate: typeof import('./src/utils/luch-request/utils.js')['isDate']
-  const isObject: typeof import('./src/utils/luch-request/utils.js')['isObject']
-  const isPlainObject: typeof import('./src/utils/luch-request/utils.js')['isPlainObject']
   const isProxy: typeof import('vue')['isProxy']
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
-  const isURLSearchParams: typeof import('./src/utils/luch-request/utils.js')['isURLSearchParams']
-  const isUndefined: typeof import('./src/utils/luch-request/utils.js')['isUndefined']
-  const luchRequest: typeof import('./src/utils/luch-request/index.js')['default']
   const mapActions: typeof import('pinia')['mapActions']
   const mapGetters: typeof import('pinia')['mapGetters']
   const mapState: typeof import('pinia')['mapState']
   const mapStores: typeof import('pinia')['mapStores']
   const mapWritableState: typeof import('pinia')['mapWritableState']
   const markRaw: typeof import('vue')['markRaw']
-  const mergeConfig: typeof import('./src/utils/luch-request/core/mergeConfig.js')['default']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
   const onAddToFavorites: typeof import('@dcloudio/uni-app')['onAddToFavorites']
@@ -101,7 +79,6 @@ declare global {
   const resolveComponent: typeof import('vue')['resolveComponent']
   const setActivePinia: typeof import('pinia')['setActivePinia']
   const setMapStoreSuffix: typeof import('pinia')['setMapStoreSuffix']
-  const settle: typeof import('./src/utils/luch-request/core/settle.js')['default']
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
@@ -115,18 +92,13 @@ declare global {
   const triggerRef: typeof import('vue')['triggerRef']
   const unref: typeof import('vue')['unref']
   const useAttrs: typeof import('vue')['useAttrs']
-  const useCache: typeof import('./src/hooks/useCache')['default']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useId: typeof import('vue')['useId']
-  const useLazyData: typeof import('./src/hooks/useLazyData')['default']
-  const useLocation: typeof import('./src/hooks/useLocation')['default']
   const useModel: typeof import('vue')['useModel']
   const useNavigate: typeof import('./src/hooks/useNavigate')['default']
-  const useNavigateTo: typeof import('./src/hooks/useNavigateTo')['default']
-  const useSessionCache: typeof import('./src/hooks/useSessionCache')['default']
   const useSlots: typeof import('vue')['useSlots']
-  const useStatusBarHeight: typeof import('./src/hooks/useStatusBarHeight')['default']
+  const useSystemInfo: typeof import('./src/hooks/useSystemInfo')['default']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
   const validatePhone: typeof import('./src/utils/index')['validatePhone']
   const watch: typeof import('vue')['watch']
@@ -137,7 +109,7 @@ declare global {
 // for type re-export
 declare global {
   // @ts-ignore
-  export type { Component, ComponentPublicInstance, ComputedRef, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, VNode, WritableComputedRef } from 'vue'
+  export type { Component, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
 }
 // for vue template auto import
@@ -234,11 +206,10 @@ declare module 'vue' {
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
-    readonly useLocation: UnwrapRef<typeof import('./src/hooks/useLocation')['default']>
     readonly useModel: UnwrapRef<typeof import('vue')['useModel']>
     readonly useNavigate: UnwrapRef<typeof import('./src/hooks/useNavigate')['default']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
-    readonly useStatusBarHeight: UnwrapRef<typeof import('./src/hooks/useStatusBarHeight')['default']>
+    readonly useSystemInfo: UnwrapRef<typeof import('./src/hooks/useSystemInfo')['default']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
     readonly validatePhone: UnwrapRef<typeof import('./src/utils/index')['validatePhone']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>

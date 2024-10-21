@@ -16,13 +16,12 @@ export default defineConfig({
   base: './',
   plugins: [
     PagesJsonTypes(),
-    uni(),
     ...(isH5 || app ? [] : [uvwt()]),
     AutoImport({
       include: [
         /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
         /\.vue$/,
-        /\.vue\?vue/ // .vue
+        /\.nvue$/
       ],
       imports: [
         'vue',
@@ -31,8 +30,8 @@ export default defineConfig({
       ],
       dirs: [
         'src/store',
-        'src/hooks/**',
-        'src/utils'
+        'src/utils',
+        'src/hooks/**'
       ],
       vueTemplate: true,
       dts: true, // or a custom path
@@ -42,7 +41,8 @@ export default defineConfig({
     }),
     Components({
       dts: true
-    })
+    }),
+    uni()
   ],
   resolve: {
     alias: {
