@@ -37,7 +37,10 @@ export default function PagesJsonTypes(): Plugin {
               JSON.stringify(pages.concat(subPackagesPages), null, 2) +
               '\n' +
               'export type TabBarPages = ' +
-              JSON.stringify(tabBarPages, null, 2)
+              JSON.stringify(tabBarPages, null, 2) +
+              '\n' +
+              'export type PagesConfig = ' +
+              JSON.stringify(json, null, 2)
 
             writeFile(dtsFilePath, dtsContent, 'utf-8', (err) => {
               if (err) console.error('写入 pages.d.ts 文件失败:', err)
