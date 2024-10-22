@@ -65,8 +65,7 @@
     "uni-use-interceptor": "^1.0.0",
     "use-lazy-data": "^1.1.1",
     "vue": "^3.4.21",
-    "vue-i18n": "^9.14.1",
-    "vue-router": "^4.2.2"
+    "vue-i18n": "^9.14.1"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.4.14",

@@ -13,7 +13,5 @@ declare module 'vue' {
     JNavbar: typeof import('./src/components/JNavbar/JNavbar.vue')['default']
     JSearch: typeof import('./src/components/JSearch.vue')['default']
     JTabs: typeof import('./src/components/JTabs.vue')['default']
-    RouterLink: typeof import('vue-router')['RouterLink']
-    RouterView: typeof import('vue-router')['RouterView']
   }
 }
