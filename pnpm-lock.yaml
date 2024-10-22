@@ -150,6 +150,9 @@ importers:
       vite:
         specifier: 5.2.8
         version: 5.2.8(@types/node@18.19.57)(sass@1.80.3)(terser@5.36.0)
+      vite-plugin-uni-pages-types:
+        specifier: ^1.0.2
+        version: 1.0.2
       vue-eslint-parser:
         specifier: ^9.4.3
         version: 9.4.3(eslint@9.13.0(jiti@1.21.6))
@@ -4343,6 +4346,9 @@ packages:
   vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
+
+  vite-plugin-uni-pages-types@1.0.2:
+    resolution: {integrity: sha512-FV9wB0DBRFcm2wIGYgQaRuA07Me180lYjX/Pyr/wzMMhNEQ4qGUQruf8ndChfanWxnKSPwG7uQDWya+r7fndFw==}
 
   vite@5.2.8:
     resolution: {integrity: sha512-OyZR+c1CE8yeHw5V5t59aXsUPPVTHMDjEZz8MgguLL/Q7NblxhZUlTu9xSPqlsUO/y+X7dlU05jdhvyycD55DA==}
@@ -9979,6 +9985,8 @@ snapshots:
       source-map: 0.7.4
 
   vary@1.1.2: {}
+
+  vite-plugin-uni-pages-types@1.0.2: {}
 
   vite@5.2.8(@types/node@18.19.57)(sass@1.80.3)(terser@5.36.0):
     dependencies:
