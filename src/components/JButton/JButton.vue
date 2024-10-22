@@ -27,7 +27,6 @@
     @chooseinvoicetitle="onChooseinvoicetitle"
     @subscribe="onSubscribe"
     @login="onLogin"
-    @tap="onClick"
   >
     <slot />
   </button>
@@ -69,10 +68,8 @@ export default {
 
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import type { ButtonProps, BaseTouchEvent } from '@uni-helper/uni-app-types'
+import type { ButtonProps } from '@uni-helper/uni-app-types'
 import { twMerge } from 'tailwind-merge'
-
-type ClickEvent = BaseTouchEvent
 
 const props = withDefaults(defineProps<Partial<{
   class: HTMLAttributes['class']
@@ -299,10 +296,6 @@ const props = withDefaults(defineProps<Partial<{
    * Open-type="agreePrivacyAuthorization" 时有效
    */
   onAgreeprivacyauthorization: ButtonProps['onAgreeprivacyauthorization'];
-  /**
-   * 点击按钮时触发
-   */
-  onClick: (event: ClickEvent) => void;
 }>>(), {
   variant: 'default',
   size: 'default'
