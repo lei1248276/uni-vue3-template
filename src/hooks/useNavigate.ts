@@ -1,6 +1,6 @@
 import type { Pages, TabBarPages } from '../pages'
 
-type Path = Pages[number]
+type Path = `/${Pages[number]}`
 type NavigateMethod = 'navigateTo' | 'redirectTo' | 'reLaunch' | 'switchTab' | 'navigateBack' | 'preloadPage'
 type NavigateOptions<T> = T extends 'navigateTo'
   ? UniApp.NavigateToOptions & { url: Path }
@@ -9,7 +9,7 @@ type NavigateOptions<T> = T extends 'navigateTo'
     : T extends 'reLaunch'
       ? UniApp.ReLaunchOptions & { url: Path }
       : T extends 'switchTab'
-        ? UniApp.SwitchTabOptions & { url: TabBarPages[number] }
+        ? UniApp.SwitchTabOptions & { url: `/${TabBarPages[number]}` }
         : T extends 'navigateBack'
           ? UniApp.NavigateBackOptions
           : T extends 'preloadPage'
@@ -65,12 +65,12 @@ export default function useNavigate<T extends NavigateMethod>(
     case 'string':
       if (p2) {
         switch (p1) {
-          case 'navigateTo': return uni.navigateTo(p2 as UniApp.NavigateToOptions)
-          case 'navigateBack': return uni.navigateBack(p2 as UniApp.NavigateBackOptions)
-          case 'redirectTo': return uni.redirectTo(p2 as UniApp.RedirectToOptions)
-          case 'reLaunch': return uni.reLaunch(p2 as UniApp.ReLaunchOptions)
-          case 'switchTab': return uni.switchTab(p2 as UniApp.SwitchTabOptions)
-          case 'preloadPage': return uni.preloadPage(p2 as UniApp.PreloadPageOptions)
+          case 'navigateTo': uni.navigateTo(p2 as UniApp.NavigateToOptions); break
+          case 'navigateBack': uni.navigateBack(p2 as UniApp.NavigateBackOptions); break
+          case 'redirectTo': uni.redirectTo(p2 as UniApp.RedirectToOptions); break
+          case 'reLaunch': uni.reLaunch(p2 as UniApp.ReLaunchOptions); break
+          case 'switchTab': uni.switchTab(p2 as UniApp.SwitchTabOptions); break
+          case 'preloadPage': uni.preloadPage(p2 as UniApp.PreloadPageOptions); break
         }
       } else {
         uni.navigateTo({ url: p1, fail: (err) => console.error(err) })
