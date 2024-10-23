@@ -85,29 +85,55 @@
   </div>
 </template>
 
-// #ifdef MP-WEIXIN
 <script lang="ts">
+/**
+ * ### 导航栏组件
+ *
+ * #### 自定义Props：
+ * - title: 标题
+ * - titleClass: 标题样式
+ * - leftArrow: 是否显示左箭头
+ * - arrowClass: 箭头样式
+ * - leftIcon: 左箭头图标
+ * - leftImg: 左箭头图片
+ * - color: 颜色
+ * - backgroundColor: 背景颜色
+ * - fixed: 是否固定
+ * - isCoverView: 是否使用 cover-view
+ */
 export default {
+  name: 'JNavbar',
+  // #ifdef MP-WEIXIN
   options: {
     virtualHost: true
   }
+  // #endif
 }
 </script>
-// #endif
 
 <script setup lang="ts">
 import iconBack from './img/back.png'
 
 withDefaults(defineProps<{
+  /** 标题 */
   title?: string
+  /** 标题样式 */
   titleClass?: string
+  /** 是否显示左箭头 */
   leftArrow?: boolean
+  /** 箭头样式 */
   arrowClass?: string
+  /** 左箭头图标 */
   leftIcon?: `icon-${string}`
+  /** 左箭头图片 */
   leftImg?: string
+  /** 颜色 */
   color?: string
+  /** 背景颜色 */
   backgroundColor?: string
+  /** 是否固定 */
   fixed?: boolean
+  /** 是否使用 cover-view */
   isCoverView?: boolean
 }>(), {
   title: undefined,
