@@ -1,8 +1,7 @@
 <template>
   <button
-    :class="twMerge('inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-transparent leading-none after:hidden', variants.variant[props.variant], variants.size[props.size], props.class)"
+    :class="twMerge('inline-flex items-center justify-center whitespace-nowrap rounded-md text-[28rpx] font-medium ring-offset-background transition-colors bg-transparent leading-none after:hidden', variants.variant[props.variant], variants.size[props.size], props.class, props.disabled && 'opacity-50 pointer-events-none')"
     hover-class="none"
-    :disabled="disabled"
     :loading="loading"
     :form-type="formType"
     :open-type="openType"

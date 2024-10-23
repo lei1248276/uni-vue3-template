@@ -54,7 +54,7 @@
           />
         </div>
 
-        <div class="flex h-[44px] flex-[6] items-center justify-center text-center react-text-[32rpx]">
+        <div class="flex h-[44px] flex-[6] items-center justify-center text-center">
           <slot v-if="$slots.default" />
           <cover-view
             v-else-if="isCoverView"
