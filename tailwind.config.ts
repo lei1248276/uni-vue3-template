@@ -1,8 +1,17 @@
 /** @type {import('tailwindcss').Config} */
+
+import plugin from 'tailwindcss/plugin'
+
 export default {
-  content: ['./index.html', './src/**/*.{vue,js,ts}'],
+  content: ['./index.html', './src/**/*.{vue,nvue,js,ts}'],
   corePlugins: {
-    preflight: false
+    preflight: false,
+    backdropOpacity: false,
+    backgroundOpacity: false,
+    borderOpacity: false,
+    divideOpacity: false,
+    ringOpacity: false,
+    textOpacity: false
   },
   theme: {
     extend: {
@@ -49,6 +58,31 @@ export default {
       }
     }
   },
-  plugins: []
+  plugins: [
+    plugin(function({ matchUtilities, theme }) {
+      matchUtilities(
+        // * inset style polyfill
+        {
+          'inset': (value) => ({
+            top: value,
+            right: value,
+            bottom: value,
+            left: value
+          }),
+          'inset-x': (value) => ({
+            left: value,
+            right: value
+          }),
+          'inset-y': (value) => ({
+            top: value,
+            bottom: value
+          })
+        },
+        {
+          values: theme('spacing'),
+          type: 'length' // 可以根据需要调整类型
+        }
+      )
+    })
+  ]
 }
-
