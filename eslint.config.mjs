@@ -2,6 +2,7 @@ import pluginVue from 'eslint-plugin-vue'
 import vueTsEslintConfig from '@vue/eslint-config-typescript'
 import vueParser from 'vue-eslint-parser'
 import tsParser from '@typescript-eslint/parser'
+import tailwind from 'eslint-plugin-tailwindcss'
 import autoImportConfig from './.eslintrc-auto-import.json' with { type: 'json' }
 import globals from 'globals'
 
@@ -9,6 +10,7 @@ export default [
   ...pluginVue.configs['flat/essential'],
   ...pluginVue.configs['flat/recommended'],
   ...vueTsEslintConfig(),
+  ...tailwind.configs['flat/recommended'],
 
   {
     files: ['**/*.vue', '**/*.ts', '**/*.js', '**/*.mjs'],
@@ -45,7 +47,13 @@ export default [
 
     // https://github.com/vuejs/eslint-config-vue
     rules: {
+      'tailwindcss/no-custom-classname': 0,
+      'tailwindcss/classnames-order': [1, {
+        classRegex: '\-?class$'
+      }],
+
       '@typescript-eslint/no-explicit-any': 0,
+
       'vue/v-on-event-hyphenation': 0,
       'vue/multi-word-component-names': 'off',
       'vue/no-multiple-template-root': 'off',
@@ -56,6 +64,7 @@ export default [
       }],
       'vue/no-v-html': 'off',
       'vue/no-v-for-template-key': 'off',
+
       'accessor-pairs': 2,
       'arrow-spacing': [2, {
         'before': true,
