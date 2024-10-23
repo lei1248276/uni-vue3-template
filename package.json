@@ -83,6 +83,7 @@
     "autoprefixer": "^10.4.17",
     "eslint": "^9.12.0",
     "eslint-plugin-vue": "^9.29.0",
+    "globals": "^15.11.0",
     "miniprogram-automator": "^0.12.1",
     "postcss": "^8.4.23",
     "postcss-class-rename-postcss8": "^1.0.2",

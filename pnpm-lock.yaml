@@ -120,6 +120,9 @@ importers:
       eslint-plugin-vue:
         specifier: ^9.29.0
         version: 9.29.1(eslint@9.13.0(jiti@1.21.6))
+      globals:
+        specifier: ^15.11.0
+        version: 15.11.0
       miniprogram-automator:
         specifier: ^0.12.1
         version: 0.12.1
@@ -2821,6 +2824,10 @@ packages:
 
   globals@14.0.0:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
+    engines: {node: '>=18'}
+
+  globals@15.11.0:
+    resolution: {integrity: sha512-yeyNSjdbyVaWurlwCpcA6XNBrHTMIeDdj0/hnvX/OLJ9ekOXYbLsLinH/MucQyGvNnXhidTdNhTtJaffL2sMfw==}
     engines: {node: '>=18'}
 
   gopd@1.0.1:
@@ -8249,6 +8256,8 @@ snapshots:
       type-fest: 0.20.2
 
   globals@14.0.0: {}
+
+  globals@15.11.0: {}
 
   gopd@1.0.1:
     dependencies:

@@ -3,6 +3,7 @@ import vueTsEslintConfig from '@vue/eslint-config-typescript'
 import vueParser from 'vue-eslint-parser'
 import tsParser from '@typescript-eslint/parser'
 import autoImportConfig from './.eslintrc-auto-import.json' with { type: 'json' }
+import globals from 'globals'
 
 export default [
   ...pluginVue.configs['flat/essential'],
@@ -22,16 +23,12 @@ export default [
         }
       },
       globals: {
+        ...globals.node,
+        ...globals.browser,
         ...autoImportConfig.globals,
-        // Node.js 全局变量
-        require: 'readonly',
-        module: 'readonly',
-        __dirname: 'readonly',
-        process: 'readonly',
-        Buffer: 'readonly',
-        console: 'readonly',
 
         UniApp: true,
+        UniNamespace: true,
         uni: true,
         plus: true,
         UniHelper: true,
@@ -48,6 +45,7 @@ export default [
 
     // https://github.com/vuejs/eslint-config-vue
     rules: {
+      '@typescript-eslint/no-explicit-any': 0,
       'vue/v-on-event-hyphenation': 0,
       'vue/multi-word-component-names': 'off',
       'vue/no-multiple-template-root': 'off',
