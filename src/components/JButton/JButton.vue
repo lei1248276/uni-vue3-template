@@ -40,9 +40,6 @@
  * - variant: 按钮的变体，可选值为 'default'、'destructive'、'outline'、'secondary'、'ghost'、'link'
  * - size: 按钮的大小，可选值为 'default'、'xs'、'sm'、'lg'、'icon'
  *
- * #### 自定义Emit：
- * - click: 点击按钮时触发
- *
  * #### uni-app 原生Props：
  * - https://uniapp.dcloud.net.cn/component/button.html
  * - disabled: 是否禁用按钮
@@ -62,7 +59,12 @@
  * - publicId: 打开公众号资料卡时，传递的号码
  */
 export default {
-  name: 'JButton'
+  name: 'JButton',
+  // #ifdef MP-WEIXIN
+  options: {
+    virtualHost: true
+  }
+  // #endif
 }
 </script>
 
