@@ -10,8 +10,8 @@ declare module 'vue' {
     JButton: typeof import('./src/components/JButton/JButton.vue')['default']
     JIcon: typeof import('./src/components/JIcon/JIcon.vue')['default']
     JImage: typeof import('./src/components/JImage/JImage.vue')['default']
+    JInput: typeof import('./src/components/JInput/JInput.vue')['default']
     JNavbar: typeof import('./src/components/JNavbar/JNavbar.vue')['default']
-    JSearch: typeof import('./src/components/JSearch.vue')['default']
     JTabs: typeof import('./src/components/JTabs.vue')['default']
   }
 }

@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4721161 */
+  src: url('iconfont.woff2?t=1729675467644') format('woff2');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-clear:before {
+  content: "\e64b";
+}
+
+.icon-search:before {
+  content: "\e614";
+}
+

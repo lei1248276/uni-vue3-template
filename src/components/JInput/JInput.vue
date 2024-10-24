@@ -1,19 +1,27 @@
 <template>
-  <view class="box-border [border-bottom:2rpx_solid_#F2F3F6] flex items-center">
+  <div :class="['flex w-full items-center rounded-md border border-input bg-background px-3 py-2 text-[28rpx] ring-offset-background placeholder:text-muted-foreground', disabled && 'opacity-50']">
     <slot
       v-if="$slots.left"
       name="left"
     />
     <image
-      v-else
+      v-else-if="leftImg"
       :src="leftImg"
-      class="w-[32rpx] h-[32rpx]"
-      :class="{[leftImgClass]: !!leftImgClass}"
+      class="mr-[20rpx]"
+      :class="leftClass"
+    />
+    <JIcon
+      v-else-if="leftIcon"
+      :type="leftIcon"
+      class="mr-[20rpx] text-[#999999]"
+      :class="leftClass"
     />
 
     <slot v-if="$slots.default" />
     <input
       v-else
+      class="grow"
+      :class="inputClass"
       :value="modelValue"
       :name="name"
       :type="type"
@@ -47,47 +55,73 @@
       :controlled="controlled"
       :alwaysSystem="alwaysSystem"
       :inputMode="inputMode"
-      class="flex-1 mx-[20rpx]"
-      :class="{[inputClass]: !!inputClass}"
-      @blur="$emit('blur'); modelValue && validation && $emit('validate', validation(modelValue))"
-      @confirm="$emit('confirm', $event.detail.value)"
-      @input="$emit('update:modelValue', $event.detail.value)"
-      @focus="$emit('focus', $event.detail)"
-      @keyboardheightchange="$emit('keyboardheightchange', $event.detail)"
+      @keyboardheightchange="$emit('keyboardheightchange', $event)"
+      @input="$emit('update:modelValue', ($event as any).detail.value); $emit('input', $event)"
+      @blur="$emit('blur', $event)"
+      @focus="$emit('focus', $event)"
+      @confirm="validation ? (validation(modelValue) && $emit('confirm', $event)) : $emit('confirm', $event)"
     >
 
     <slot
       v-if="$slots.right"
       name="right"
     />
-    <image
+    <JIcon
       v-else-if="showClear"
-      v-show="modelValue"
-      :src="clear"
-      class="w-[32rpx] h-[32rpx] btn-zoom"
+      type="icon-clear"
+      class="btn-zoom ml-[20rpx] text-[38rpx] text-[#e6e6e6]"
+      :class="{'hidden': !modelValue}"
       @tap.stop="$emit('update:modelValue', ''); $emit('clear');"
     />
-  </view>
+  </div>
 </template>
 
-// #ifdef MP-WEIXIN
 <script lang="ts">
+/**
+ * ### 输入框组件
+ *
+ * #### 自定义Props：
+ * - showClear: 是否显示清除按钮
+ * - inputClass: 输入框class
+ * - leftIcon: 左侧图标名
+ * - leftImg: 左侧图片路径
+ * - leftClass: 左侧图标class
+ * - validation: confirm 验证函数
+ *
+ * #### uni-app 原生Props：
+ * - https://uniapp.dcloud.net.cn/component/input.html
+ */
 export default {
+  name: 'JInput',
   options: {
+    // #ifdef MP-WEIXIN
     virtualHost: true
+    // #endif
   }
 }
 </script>
-// #endif
 
 <script setup lang="ts">
-import type { InputOnFocusDetail, InputOnKeyboardheightchangeDetail } from '@uni-helper/uni-app-types'
-
-import clear from '@img/clear.png'
+import type { InputProps } from '@uni-helper/uni-app-types'
 
 interface Props{
+  // ! 自定义props
+  className?: string
   /** 输入框的初始内容 */
   modelValue: string
+  /** 是否显示clear图标 */
+  showClear?: boolean
+  /** 输入框class */
+  inputClass?: string
+  /** left插槽字体图标名 */
+  leftIcon?: `icon-${string}`
+  /** left插槽图片图标路径 */
+  leftImg?: string
+  /** left插槽class */
+  leftClass?: string
+  /** confirm 验证函数 */
+  validation?: ((value: string) => boolean)
+
   /** 在 form 中作为 key */
   name?: string
   /**
@@ -109,13 +143,13 @@ interface Props{
    *
    * 默认为 text
    */
-  type?: 'text' | 'number' | 'idcard' | 'digit' | 'tel' | 'safe-password' | 'nickname'
+  type?: InputProps['type']
   /**
    * 文本区域的语义，根据类型自动填充
    *
    * oneTimeCode 一次性验证码
    */
-  textContentType?: 'oneTimeCode'
+  textContentType?: InputProps['textContentType']
   /**
    * 是否是密码类型
    *
@@ -185,7 +219,7 @@ interface Props{
    *
    * @decs done 完成
    */
-  confirmType?: 'send' | 'search' | 'next' | 'go' | 'done'
+  confirmType?: InputProps['confirmType']
   /**
    * 点击键盘右下角按钮时是否保持键盘不收起
    *
@@ -209,7 +243,7 @@ interface Props{
   /**
    * 键盘弹起时，是否自动上推页面
    *
-   * 默认为 true
+   * 默认为 false
    */
   adjustPosition?: boolean
   /**
@@ -267,7 +301,7 @@ interface Props{
    */
   controlled?: boolean
   /**
-   * 是否强制使用系统键盘和 Web-view 创建的 input 元素
+   * 是否强制使用系统键盘和 Web-div 创建的 input 元素
    *
    * 为 true 时，confirm-type、confirm-hold 可能失效
    *
@@ -293,27 +327,11 @@ interface Props{
    *
    * url 网址输入键盘，表单内网址输入因 type="url"
    */
-  inputMode?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url'
-
-  // ! 自定义props
-  /** 验证函数 */
-  validation?: ((value: string) => boolean) | null
-  /** 是否显示clear图标 */
-  showClear?: boolean
-  /** 输入框class */
-  inputClass?: string
-  /** left插槽图片地址 */
-  leftImg?: string
-  /** left插槽图片class */
-  leftImgClass?: string
+  inputMode?: InputProps['inputMode']
 }
 
 withDefaults(defineProps<Props>(), {
-  validation: null,
   showClear: true,
-  inputClass: '',
-  leftImg: '',
-  leftImgClass: '',
   type: 'text',
   password: false,
   placeholderClass: 'input-placeholder',
@@ -336,12 +354,21 @@ withDefaults(defineProps<Props>(), {
   inputMode: 'text'
 })
 defineEmits<{
+  /** 输入框内容变化时触发 */
   (e: 'update:modelValue', value: string): void
-  (e: 'confirm', value: string): void
+  /** 点击清除按钮时触发 */
   (e: 'clear'): void
-  (e: 'blur'): void
+  /** 验证函数 */
   (e: 'validate', isValid: boolean): void
-  (e: 'focus', value: InputOnFocusDetail): void
-  (e: 'keyboardheightchange', value: InputOnKeyboardheightchangeDetail): void
+  /** 点击完成按钮时触发 */
+  (e: 'confirm', event: Parameters<NonNullable<InputProps['onConfirm']>>[0]): void
+  /** 聚焦时触发 */
+  (e: 'focus', event: Parameters<NonNullable<InputProps['onFocus']>>[0]): void
+  /** 失焦时触发 */
+  (e: 'blur', event: Parameters<NonNullable<InputProps['onBlur']>>[0]): void
+  /** 输入时触发 */
+  (e: 'input', event: Parameters<NonNullable<InputProps['onInput']>>[0]): void
+  /** 键盘高度变化时触发 */
+  (e: 'keyboardheightchange', event: Parameters<NonNullable<InputProps['onKeyboardheightchange']>>[0]): void
 }>()
 </script>
