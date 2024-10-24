@@ -1,7 +1,7 @@
 <template>
   <span
     class="iconfont"
-    :class="[twMerge('text-[32rpx]', props.type, props.class)]"
+    :class="type"
   >
     <slot v-if="$slots.default" />
   </span>
@@ -18,10 +18,7 @@ export default {
 // #endif
 
 <script setup lang="ts">
-import { twMerge } from 'tailwind-merge'
-
-const props = defineProps<{
-  class?: any
+defineProps<{
   type: `icon-${string}`
 }>()
 </script>

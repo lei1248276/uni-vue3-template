@@ -60,7 +60,6 @@
     "@dcloudio/uni-mp-xhs": "3.0.0-4020920240930001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4020920240930001",
     "pinia": "2.0.35",
-    "tailwind-merge": "^2.5.3",
     "uni-use-cache": "^1.0.0",
     "uni-use-interceptor": "^1.0.0",
     "use-lazy-data": "^1.1.1",

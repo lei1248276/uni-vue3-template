@@ -1,6 +1,7 @@
 <template>
   <button
-    :class="twMerge('inline-flex items-center justify-center whitespace-nowrap rounded-md text-[28rpx] font-medium ring-offset-background transition-colors bg-transparent leading-none after:hidden', variants.variant[props.variant], variants.size[props.size], props.class, props.disabled && 'opacity-50 pointer-events-none')"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-[28rpx] font-medium leading-none ring-offset-background transition-colors after:hidden"
+    :class="[variants.variant[props.variant], variants.size[props.size], props.disabled && 'pointer-events-none opacity-50']"
     hover-class="none"
     :loading="loading"
     :form-type="formType"
@@ -16,16 +17,17 @@
     :group-id="groupId"
     :guild-id="guildId"
     :public-id="publicId"
-    @getphonenumber="onGetphonenumber"
-    @error="onError"
-    @opensetting="onOpensetting"
-    @launchapp="onLaunchapp"
-    @chooseavatar="onChooseavatar"
-    @addgroupapp="onAddgroupapp"
-    @chooseaddress="onChooseaddress"
-    @chooseinvoicetitle="onChooseinvoicetitle"
-    @subscribe="onSubscribe"
-    @login="onLogin"
+    @getphonenumber="$emit('getphonenumber', $event)"
+    @error="$emit('error', $event)"
+    @opensetting="$emit('opensetting', $event)"
+    @launchapp="$emit('launchapp', $event)"
+    @chooseavatar="$emit('chooseavatar', $event)"
+    @addgroupapp="$emit('addgroupapp', $event)"
+    @chooseaddress="$emit('chooseaddress', $event)"
+    @chooseinvoicetitle="$emit('chooseinvoicetitle', $event)"
+    @subscribe="$emit('subscribe', $event)"
+    @login="$emit('login', $event)"
+    @agreeprivacyauthorization="$emit('agreeprivacyauthorization', $event)"
   >
     <slot />
   </button>
@@ -70,7 +72,6 @@ export default {
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
 import type { ButtonProps } from '@uni-helper/uni-app-types'
-import { twMerge } from 'tailwind-merge'
 
 const props = withDefaults(defineProps<Partial<{
   class: HTMLAttributes['class']
@@ -235,72 +236,35 @@ const props = withDefaults(defineProps<Partial<{
    * Open-type="openPublicProfile" 时有效
    */
   publicId: string;
-  /**
-   * 获取用户手机号时回调
-   *
-   * Open-type="getPhoneNumber" 时有效
-   */
-  onGetphonenumber: ButtonProps['onGetphonenumber'];
-  /** 使用开放能力发生错误时回调 */
-  onError: ButtonProps['onError'];
-  /**
-   * 在打开授权设置页并关闭后回调
-   *
-   * Open-type="openSetting" 时有效
-   */
-  onOpensetting: ButtonProps['onOpensetting'];
-  /**
-   * 从小程序成功打开 APP 回调
-   *
-   * Open-type="launchApp" 时有效
-   */
-  onLaunchapp: ButtonProps['onLaunchapp'];
-  /**
-   * 获取用户头像回调
-   *
-   * Open-type="chooseAvatar" 时有效
-   */
-  onChooseavatar: ButtonProps['onChooseavatar'];
-  /**
-   * 添加群应用回调
-   *
-   * Open-type="addGroupApp" 时有效
-   */
-  onAddgroupapp: ButtonProps['onAddgroupapp'];
-  /**
-   * 用户编辑并选择收货地址回调
-   *
-   * Open-type="chooseAddress" 时有效
-   */
-  onChooseaddress: ButtonProps['onChooseaddress'];
-  /**
-   * 用户选择发票抬头回调
-   *
-   * Open-type="chooseInvoiceTitle" 时有效
-   */
-  onChooseinvoicetitle: ButtonProps['onChooseinvoicetitle'];
-  /**
-   * 订阅消息授权回调
-   *
-   * Open-type="subscribe" 时有效
-   */
-  onSubscribe: ButtonProps['onSubscribe'];
-  /**
-   * 登录回调
-   *
-   * Open-type="login" 时有效
-   */
-  onLogin: ButtonProps['onLogin'];
-  /**
-   * 用户同意隐私协议回调
-   *
-   * Open-type="agreePrivacyAuthorization" 时有效
-   */
-  onAgreeprivacyauthorization: ButtonProps['onAgreeprivacyauthorization'];
 }>>(), {
   variant: 'default',
   size: 'default'
 })
+
+defineEmits<{
+  /** 获取用户手机号回调 Open-type="getPhoneNumber" 时有效 */
+  (e: 'getphonenumber', event: Parameters<NonNullable<ButtonProps['onGetphonenumber']>>[0]): void
+  /** 使用开放能力发生错误时回调 */
+  (e: 'error', event: Parameters<NonNullable<ButtonProps['onError']>>[0]): void
+  /** 在打开授权设置页并关闭后回调 Open-type="openSetting" 时有效 */
+  (e: 'opensetting', event: Parameters<NonNullable<ButtonProps['onOpensetting']>>[0]): void
+  /** 从小程序成功打开 APP 回调 Open-type="launchApp" 时有效 */
+  (e: 'launchapp', event: Parameters<NonNullable<ButtonProps['onLaunchapp']>>[0]): void
+  /** 获取用户头像回调 Open-type="chooseAvatar" 时有效  */
+  (e: 'chooseavatar', event: Parameters<NonNullable<ButtonProps['onChooseavatar']>>[0]): void
+  /** 添加群应用回调 Open-type="addGroupApp" 时有效 */
+  (e: 'addgroupapp', event: Parameters<NonNullable<ButtonProps['onAddgroupapp']>>[0]): void
+  /** 用户编辑并选择收货地址回调 Open-type="chooseAddress" 时有效 */
+  (e: 'chooseaddress', event: Parameters<NonNullable<ButtonProps['onChooseaddress']>>[0]): void
+  /** 用户选择发票抬头回调 Open-type="chooseInvoiceTitle" 时有效 */
+  (e: 'chooseinvoicetitle', event: Parameters<NonNullable<ButtonProps['onChooseinvoicetitle']>>[0]): void
+  /** 订阅消息授权回调 Open-type="subscribe" 时有效 */
+  (e: 'subscribe', event: Parameters<NonNullable<ButtonProps['onSubscribe']>>[0]): void
+  /** 登录回调 Open-type="login" 时有效 */
+  (e: 'login', event: Parameters<NonNullable<ButtonProps['onLogin']>>[0]): void
+  /** 用户同意隐私协议回调 Open-type="agreePrivacyAuthorization" 时有效 */
+  (e: 'agreeprivacyauthorization', event: Parameters<NonNullable<ButtonProps['onAgreeprivacyauthorization']>>[0]): void
+}>()
 
 const variants = {
   variant: {

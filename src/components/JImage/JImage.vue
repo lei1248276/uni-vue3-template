@@ -1,5 +1,8 @@
 <template>
-  <div :class="twMerge('relative w-[320rpx] h-[240rpx] overflow-hidden', props.class)">
+  <div
+    class="relative overflow-hidden"
+    :style="{'width': width, 'height': height}"
+  >
     <span
       v-if="!src || !loaded || isError"
       class="absolute inset-0 bg-[length:60%] bg-center bg-no-repeat"
@@ -53,11 +56,13 @@ export default {
 
 <script setup lang="ts">
 import type { ImageProps } from '@uni-helper/uni-app-types'
-import { twMerge } from 'tailwind-merge'
 import alt from './img/alt.png'
 
 const props = withDefaults(defineProps<{
-  class?: string
+  /** 宽度 */
+  width?: string
+  /** 高度 */
+  height?: string
   /** 图片类名 */
   imgClass?: string
   /** 是否预览图片 */
@@ -136,8 +141,8 @@ const props = withDefaults(defineProps<{
   /** 图片加载完毕时触发 */
   onLoad?: ImageProps['onLoad'];
 }>(), {
-  class: undefined,
-  imgClass: undefined,
+  width: '320rpx',
+  height: '240rpx',
   altImg: alt,
   preview: false,
   lazyLoad: false,
@@ -145,9 +150,7 @@ const props = withDefaults(defineProps<{
   fadeShow: true,
   webp: false,
   showMenuByLongpress: false,
-  draggable: true,
-  onError: undefined,
-  onLoad: undefined
+  draggable: true
 })
 
 const loading = ref(false)
