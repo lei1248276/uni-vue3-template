@@ -19,8 +19,8 @@
       :webp="webp"
       :show-menu-by-longpress="showMenuByLongpress"
       :draggable="draggable"
-      @load="loaded = true; onLoad?.($event)"
-      @error="isError = true; onError?.($event)"
+      @load="loaded = true; $emit('load', $event)"
+      @error="isError = true; $emit('error', $event)"
       @tap="onPreview"
     />
   </div>
@@ -136,10 +136,6 @@ const props = withDefaults(defineProps<{
    * 默认为 true
    */
   draggable?: boolean;
-  /** 图片加载错误时触发 */
-  onError?: ImageProps['onError'];
-  /** 图片加载完毕时触发 */
-  onLoad?: ImageProps['onLoad'];
 }>(), {
   width: '320rpx',
   height: '240rpx',
@@ -152,6 +148,12 @@ const props = withDefaults(defineProps<{
   showMenuByLongpress: false,
   draggable: true
 })
+defineEmits<{
+  /** 图片加载完毕时触发 */
+  (e: 'load', event: UniHelper.ImageOnLoadEvent): void
+  /** 图片加载错误时触发 */
+  (e: 'error', event: UniHelper.ImageOnErrorEvent): void
+}>()
 
 const loading = ref(false)
 const loaded = ref(false)
