@@ -18,16 +18,19 @@
     :guild-id="guildId"
     :public-id="publicId"
     @getphonenumber="$emit('getphonenumber', $event)"
+    @getuserinfo="$emit('getuserinfo', $event)"
     @error="$emit('error', $event)"
     @opensetting="$emit('opensetting', $event)"
     @launchapp="$emit('launchapp', $event)"
+    @contact="$emit('contact', $event)"
     @chooseavatar="$emit('chooseavatar', $event)"
+    @agreeprivacyauthorization="$emit('agreeprivacyauthorization', $event)"
     @addgroupapp="$emit('addgroupapp', $event)"
     @chooseaddress="$emit('chooseaddress', $event)"
     @chooseinvoicetitle="$emit('chooseinvoicetitle', $event)"
     @subscribe="$emit('subscribe', $event)"
     @login="$emit('login', $event)"
-    @agreeprivacyauthorization="$emit('agreeprivacyauthorization', $event)"
+    @im="$emit('im', $event)"
   >
     <slot />
   </button>
@@ -243,27 +246,33 @@ const props = withDefaults(defineProps<Partial<{
 
 defineEmits<{
   /** 获取用户手机号回调 Open-type="getPhoneNumber" 时有效 */
-  (e: 'getphonenumber', event: Parameters<NonNullable<ButtonProps['onGetphonenumber']>>[0]): void
+  (e: 'getphonenumber', event: UniHelper.ButtonOnGetphonenumberEvent): void
+  /** 用户点击该按钮时，会返回获取到的用户信息，从返回参数的detail中获取到的值同uni.getUserInfo  open-type="getUserInfo" 时有效*/
+  (e: 'getuserinfo', event: any): void
   /** 使用开放能力发生错误时回调 */
-  (e: 'error', event: Parameters<NonNullable<ButtonProps['onError']>>[0]): void
+  (e: 'error', event: UniHelper.ButtonOnErrorEvent): void
   /** 在打开授权设置页并关闭后回调 Open-type="openSetting" 时有效 */
-  (e: 'opensetting', event: Parameters<NonNullable<ButtonProps['onOpensetting']>>[0]): void
+  (e: 'opensetting', event: UniHelper.ButtonOnOpensettingEvent): void
   /** 从小程序成功打开 APP 回调 Open-type="launchApp" 时有效 */
-  (e: 'launchapp', event: Parameters<NonNullable<ButtonProps['onLaunchapp']>>[0]): void
+  (e: 'launchapp', event: UniHelper.ButtonOnLaunchappEvent): void
+  /** 客服消息回调 Open-type="contact" 时有效 */
+  (e: 'contact', event: any): void
   /** 获取用户头像回调 Open-type="chooseAvatar" 时有效  */
-  (e: 'chooseavatar', event: Parameters<NonNullable<ButtonProps['onChooseavatar']>>[0]): void
-  /** 添加群应用回调 Open-type="addGroupApp" 时有效 */
-  (e: 'addgroupapp', event: Parameters<NonNullable<ButtonProps['onAddgroupapp']>>[0]): void
-  /** 用户编辑并选择收货地址回调 Open-type="chooseAddress" 时有效 */
-  (e: 'chooseaddress', event: Parameters<NonNullable<ButtonProps['onChooseaddress']>>[0]): void
-  /** 用户选择发票抬头回调 Open-type="chooseInvoiceTitle" 时有效 */
-  (e: 'chooseinvoicetitle', event: Parameters<NonNullable<ButtonProps['onChooseinvoicetitle']>>[0]): void
-  /** 订阅消息授权回调 Open-type="subscribe" 时有效 */
-  (e: 'subscribe', event: Parameters<NonNullable<ButtonProps['onSubscribe']>>[0]): void
-  /** 登录回调 Open-type="login" 时有效 */
-  (e: 'login', event: Parameters<NonNullable<ButtonProps['onLogin']>>[0]): void
+  (e: 'chooseavatar', event: UniHelper.ButtonOnChooseavatarEvent): void
   /** 用户同意隐私协议回调 Open-type="agreePrivacyAuthorization" 时有效 */
-  (e: 'agreeprivacyauthorization', event: Parameters<NonNullable<ButtonProps['onAgreeprivacyauthorization']>>[0]): void
+  (e: 'agreeprivacyauthorization', event: UniHelper.ButtonOnAgreeprivacyauthorizationEvent): void
+  /** 添加群应用回调 Open-type="addGroupApp" 时有效 */
+  (e: 'addgroupapp', event: UniHelper.ButtonOnAddgroupappEvent): void
+  /** 用户编辑并选择收货地址回调 Open-type="chooseAddress" 时有效 */
+  (e: 'chooseaddress', event: UniHelper.ButtonOnChooseaddressEvent): void
+  /** 用户选择发票抬头回调 Open-type="chooseInvoiceTitle" 时有效 */
+  (e: 'chooseinvoicetitle', event: UniHelper.ButtonOnChooseinvoicetitleEvent): void
+  /** 订阅消息授权回调 Open-type="subscribe" 时有效 */
+  (e: 'subscribe', event: UniHelper.ButtonOnSubscribeEvent): void
+  /** 登录回调 Open-type="login" 时有效 */
+  (e: 'login', event: UniHelper.ButtonOnLoginEvent): void
+  /** 监听跳转IM的成功回调 Open-type="im" 时有效 */
+  (e: 'im', event: any): void
 }>()
 
 const variants = {
