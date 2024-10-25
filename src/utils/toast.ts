@@ -1,40 +1,38 @@
 const toast = {
   state: {
-    count: 0
+    show: false
   },
-  start(message?: string): number | void {
-    if (this.state.count !== 0) return ++this.state.count
+  start(message?: string) {
+    if (this.state.show) return
 
     uni.showLoading({
       title: message || '加载中...',
-      mask: true
+      mask: true,
+      success: () => { this.state.show = true }
     })
-    ++this.state.count
   },
-  close(): number | void {
-    if (this.state.count > 1) return --this.state.count
+  close() {
+    if (!this.state.show) return
 
     uni.hideLoading()
-    --this.state.count
+    this.state.show = false
   },
-  success(title: string, callback?: () => void) {
-    this.state.count = 0
-
+  success(title: string, complete?: () => void) {
     uni.showToast({
-      icon: title?.length! > 7 ? 'none' : 'success',
+      icon: title.length > 7 ? 'none' : 'success',
       title,
       duration: 1000,
-      complete: callback
+      complete: complete,
+      success: () => { this.state.show = false }
     })
   },
-  fail(title?: string, callback?: () => void) {
-    this.state.count = 0
-
+  fail(title: string = '请求失败', complete?: () => void) {
     uni.showToast({
-      icon: title?.length! > 7 ? 'none' : 'error',
-      title: title || '请求失败',
-      duration: 2000,
-      complete: callback
+      icon: title.length > 7 ? 'none' : 'error',
+      title: title,
+      duration: 3000,
+      complete: complete,
+      success: () => { this.state.show = false }
     })
   }
 }
