@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     JButton: typeof import('./src/components/JButton/JButton.vue')['default']
     JCell: typeof import('./src/components/JCell/JCell.vue')['default']
+    JCheckbox: typeof import('./src/components/JCheckbox/JCheckbox.vue')['default']
     JIcon: typeof import('./src/components/JIcon/JIcon.vue')['default']
     JImage: typeof import('./src/components/JImage/JImage.vue')['default']
     JInput: typeof import('./src/components/JInput/JInput.vue')['default']
