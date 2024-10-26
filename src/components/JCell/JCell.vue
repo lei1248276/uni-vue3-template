@@ -1,19 +1,11 @@
 <template>
   <div class="flex w-full items-center rounded-[12rpx] bg-white px-[32rpx] py-[26rpx] shadow-[0_2rpx_14rpx_0_#edeef1]">
-    <template v-if="icon">
-      <JIcon
-        v-if="icon.startsWith('icon-')"
-        :type="(icon as `icon-${string}`)"
-        class="mr-[20rpx] text-[40rpx]"
-        :class="iconClass"
-      />
-      <image
-        v-else
-        :src="icon"
-        class="mr-[20rpx] size-[40rpx]"
-        :class="iconClass"
-      />
-    </template>
+    <JIcon
+      v-if="icon"
+      :icon="icon"
+      class="mr-[20rpx] !size-[40rpx] !text-[40rpx]"
+      :class="iconClass"
+    />
 
     <span
       v-if="title"
@@ -24,7 +16,7 @@
 
     <JIcon
       v-if="arrow"
-      type="icon-arrow"
+      icon="icon-arrow"
       class="ml-auto text-[#999]"
       :class="arrowClass"
     />

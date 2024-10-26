@@ -32,24 +32,18 @@
             v-if="$slots.left"
             name="left"
           />
-          <JIcon
-            v-else-if="leftArrow &&leftIcon"
-            :type="leftIcon"
-            :class="arrowClass"
-            class="btn-zoom ml-[20rpx] text-[40rpx]"
-            @tap.stop="useNavigate(1)"
-          />
           <cover-image
-            v-else-if="leftArrow && isCoverView"
-            :src="leftImg || iconBack"
+            v-else-if="isCoverView && leftArrow"
+            :src="leftIcon"
+            :class="arrowClass"
             class="btn-zoom ml-[20rpx] size-[40rpx]"
             @tap="useNavigate(1)"
           />
-          <image
+          <JIcon
             v-else-if="leftArrow"
-            :src="leftImg || iconBack"
+            :icon="leftIcon"
             :class="arrowClass"
-            class="btn-zoom ml-[20rpx] size-[40rpx]"
+            class="btn-zoom ml-[20rpx] !size-[40rpx] !text-[40rpx]"
             @tap.stop="useNavigate(1)"
           />
         </div>
@@ -94,8 +88,7 @@
  * - titleClass: 标题样式
  * - leftArrow: 是否显示左箭头
  * - arrowClass: 箭头样式
- * - leftIcon: 左箭头图标
- * - leftImg: 左箭头图片
+ * - leftIcon: 左箭头图标,可以为字体图标和图片路径
  * - color: 颜色
  * - backgroundColor: 背景颜色
  * - fixed: 是否固定
@@ -123,10 +116,8 @@ withDefaults(defineProps<{
   leftArrow?: boolean
   /** 箭头样式 */
   arrowClass?: string
-  /** 左箭头图标 */
-  leftIcon?: `icon-${string}`
-  /** 左箭头图片 */
-  leftImg?: string
+  /** 左箭头图标,可以为字体图标和图片路径 */
+  leftIcon?: `icon-${string}` | string
   /** 颜色 */
   color?: string
   /** 背景颜色 */
@@ -136,16 +127,9 @@ withDefaults(defineProps<{
   /** 是否使用 cover-view */
   isCoverView?: boolean
 }>(), {
-  title: undefined,
-  titleClass: undefined,
-  leftArrow: false,
-  arrowClass: undefined,
-  leftIcon: undefined,
-  leftImg: undefined,
+  leftIcon: iconBack,
   color: '#333',
-  backgroundColor: '#fff',
-  fixed: false,
-  isCoverView: false
+  backgroundColor: '#fff'
 })
 
 const statusBarHeight = useSystemInfo().statusBarHeight

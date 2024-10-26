@@ -7,17 +7,10 @@
       :class="{ 'pointer-events-none opacity-50': option.disabled }"
       @tap="!option.disabled && $emit('update:modelValue', option.value)"
     >
-      <image
-        v-if="iconSrc && modelValue === option.value"
-        :src="iconSrc"
-        mode="aspectFit"
-        class="mr-[5rpx] inline-block size-[50rpx]"
+      <JIcon
+        :icon="modelValue === option.value ? icon : 'icon-radio-unselect'"
+        class="mr-[5rpx] !size-[50rpx] rounded-full !text-[50rpx]"
         :class="iconClass"
-      />
-      <span
-        v-else
-        class="iconfont mr-[5rpx] inline-block size-[50rpx] rounded-full text-[50rpx]"
-        :class="[iconClass, modelValue === option.value ? icon : 'icon-radio-unselect']"
       />
       <span :class="labelClass">{{ option.label }}</span>
     </div>
@@ -31,8 +24,7 @@
  * #### 自定义Props：
  * - modelValue: 选中值
  * - options: 选项列表
- * - icon?: 选中时的图标，默认值为字体图标 `icon-radio`
- * - iconSrc?: 选中时的图标，图片路径
+ * - icon?: 选中时的图标，可以为字体图标和图片路径，默认值为字体图标 `icon-radio`
  * - iconClass?: 图标类名
  * - labelClass?: 标签类名
  */
@@ -49,14 +41,17 @@ export default {
 <script setup lang="ts" generic="T">
 withDefaults(defineProps<{
   modelValue: T
+  /** 选项列表 */
   options: {
     label: string
     value: T
     disabled?: boolean
   }[]
-  icon?: `icon-${string}`
-  iconSrc?: string
+  /** 选中时的图标，可以为字体图标和图片路径，默认值为字体图标 `icon-radio` */
+  icon?: `icon-${string}` | string
+  /** 图标类名 */
   iconClass?: string
+  /** 标签类名 */
   labelClass?: string
 }>(), {
   icon: 'icon-radio'

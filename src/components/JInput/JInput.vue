@@ -4,16 +4,10 @@
       v-if="$slots.left"
       name="left"
     />
-    <image
-      v-else-if="leftImg"
-      :src="leftImg"
-      class="mr-[20rpx]"
-      :class="leftClass"
-    />
     <JIcon
       v-else-if="leftIcon"
-      :type="leftIcon"
-      class="mr-[20rpx] text-[#999999]"
+      :icon="leftIcon"
+      class="bg-full mr-[20rpx] text-[#999999]"
       :class="leftClass"
     />
 
@@ -68,8 +62,8 @@
     />
     <JIcon
       v-else-if="showClear"
-      type="icon-clear"
-      class="btn-zoom ml-[20rpx] text-[38rpx] text-[#e6e6e6]"
+      icon="icon-clear"
+      class="btn-zoom ml-[20rpx] !text-[38rpx] text-[#e6e6e6]"
       :class="{'hidden': !modelValue}"
       @tap.stop="$emit('update:modelValue', ''); $emit('clear');"
     />
@@ -83,8 +77,7 @@
  * #### 自定义Props：
  * - showClear: 是否显示清除按钮
  * - inputClass: 输入框class
- * - leftIcon: 左侧图标名
- * - leftImg: 左侧图片路径
+ * - leftIcon: 左侧图标名,可以为字体图标和图片路径
  * - leftClass: 左侧图标class
  * - validation: confirm 验证函数
  *
@@ -113,10 +106,8 @@ interface Props{
   showClear?: boolean
   /** 输入框class */
   inputClass?: string
-  /** left插槽字体图标名 */
-  leftIcon?: `icon-${string}`
-  /** left插槽图片图标路径 */
-  leftImg?: string
+  /** left插槽字体图标名,可以为字体图标和图片路径 */
+  leftIcon?: `icon-${string}` | string
   /** left插槽class */
   leftClass?: string
   /** confirm 验证函数 */
@@ -361,14 +352,14 @@ defineEmits<{
   /** 验证函数 */
   (e: 'validate', isValid: boolean): void
   /** 点击完成按钮时触发 */
-  (e: 'confirm', event: Parameters<NonNullable<InputProps['onConfirm']>>[0]): void
+  (e: 'confirm', event: UniHelper.InputOnConfirmEvent): void
   /** 聚焦时触发 */
-  (e: 'focus', event: Parameters<NonNullable<InputProps['onFocus']>>[0]): void
+  (e: 'focus', event: UniHelper.InputOnFocusEvent): void
   /** 失焦时触发 */
-  (e: 'blur', event: Parameters<NonNullable<InputProps['onBlur']>>[0]): void
+  (e: 'blur', event: UniHelper.InputOnBlurEvent): void
   /** 输入时触发 */
-  (e: 'input', event: Parameters<NonNullable<InputProps['onInput']>>[0]): void
+  (e: 'input', event: UniHelper.InputOnInputEvent): void
   /** 键盘高度变化时触发 */
-  (e: 'keyboardheightchange', event: Parameters<NonNullable<InputProps['onKeyboardheightchange']>>[0]): void
+  (e: 'keyboardheightchange', event: UniHelper.InputOnKeyboardheightchangeEvent): void
 }>()
 </script>
