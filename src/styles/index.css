@@ -5,19 +5,73 @@
 
 @layer components {
   .mid{
-    @apply !absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%];
+    @apply !absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
   }
 
   .y-mid{
-    @apply !absolute top-[50%] translate-y-[-50%];
+    @apply !absolute top-1/2 -translate-y-1/2;
   }
 
   .x-mid{
-    @apply !absolute left-[50%] translate-x-[-50%];
+    @apply !absolute left-1/2 -translate-x-1/2;
   }
 
   .btn-zoom{
     @apply relative after:absolute after:top-[-10rpx] after:right-[-10rpx] after:bottom-[-10rpx] after:left-[-10rpx];
+  }
+
+  .bg-full{
+    @apply bg-[length:100%_100%];
+  }
+}
+
+@layer utilities{
+  /* 元素入场动画 */
+  @keyframes enter {
+    0% {
+      opacity: 0;
+      transform: translateY(10px)
+    }
+    to {
+      opacity: 1;
+      transform: none
+    }
+  }
+  .animate-enter {
+    --stagger: 0;
+    --delay: 120ms;
+    --start: 0ms;
+    animation: enter 1s both 1;
+    animation-delay: calc(var(--stagger) * var(--delay) + var(--start));
+  }
+  .animate-enter-content > .animate-content {
+    --stagger: 0;
+    --delay: 120ms;
+    --start: 0ms;
+    animation: enter 1s both 1;
+    animation-delay: calc(var(--start) + var(--stagger) * var(--delay));
+  }
+  .animate-enter-content > .animate-content:nth-child(1) { --stagger: 1; }
+  .animate-enter-content > .animate-content:nth-child(2) { --stagger: 2; }
+  .animate-enter-content > .animate-content:nth-child(3) { --stagger: 3; }
+  .animate-enter-content > .animate-content:nth-child(4) { --stagger: 4; }
+  .animate-enter-content > .animate-content:nth-child(5) { --stagger: 5; }
+  .animate-enter-content > .animate-content:nth-child(6) { --stagger: 6; }
+  .animate-enter-content > .animate-content:nth-child(7) { --stagger: 7; }
+  .animate-enter-content > .animate-content:nth-child(8) { --stagger: 8; }
+  .animate-enter-content > .animate-content:nth-child(9) { --stagger: 9; }
+  .animate-enter-content > .animate-content:nth-child(10) { --stagger: 10; }
+
+  @keyframes emerge {
+    0% {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .animate-emerge {
+    animation: emerge 1s both 1;
   }
 }
 
