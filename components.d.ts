@@ -13,6 +13,7 @@ declare module 'vue' {
     JImage: typeof import('./src/components/JImage/JImage.vue')['default']
     JInput: typeof import('./src/components/JInput/JInput.vue')['default']
     JNavbar: typeof import('./src/components/JNavbar/JNavbar.vue')['default']
-    JTabs: typeof import('./src/components/JTabs.vue')['default']
+    JRadio: typeof import('./src/components/JRadio/JRadio.vue')['default']
+    JTabs: typeof import('./src/components/JTabs/JTabs.vue')['default']
   }
 }
