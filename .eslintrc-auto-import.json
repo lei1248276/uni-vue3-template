@@ -112,6 +112,24 @@
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true
+    "watchSyncEffect": true,
+    "chunk": true,
+    "extend": true,
+    "hasChanged": true,
+    "hasOwn": true,
+    "isArray": true,
+    "isDate": true,
+    "isFunction": true,
+    "isMap": true,
+    "isObject": true,
+    "isPlainObject": true,
+    "isPromise": true,
+    "isRegExp": true,
+    "isSet": true,
+    "isString": true,
+    "isSymbol": true,
+    "objectToString": true,
+    "remove": true,
+    "toTypeString": true
   }
 }
