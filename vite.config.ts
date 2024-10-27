@@ -41,6 +41,10 @@ export default defineConfig({
       }
     }),
     Components({
+      dirs: [
+        'src/components/**',
+        'src/uni_modules/**'
+      ],
       dts: true
     }),
     uni()

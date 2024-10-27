@@ -37,5 +37,8 @@
 				"selectedIconPath": ""
 			}
 		]
+	},
+	"easycom": {
+		"autoscan": false
 	}
 }
