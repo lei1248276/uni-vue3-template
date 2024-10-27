@@ -2,7 +2,7 @@
   <span
     class="iconfont bg-full inline-block size-[32rpx] text-[32rpx]"
     :class="icon?.startsWith('icon-') ? icon : undefined"
-    :style="{ 'background-image': !icon || icon.startsWith('icon-') ? undefined : `url(${icon})` }"
+    :style="!icon || icon.startsWith('icon-') ? undefined : `background-image: url(${icon})`"
   >
     <slot v-if="$slots.default" />
   </span>
