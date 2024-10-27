@@ -5,7 +5,6 @@ import { UnifiedViteWeappTailwindcssPlugin as uvwt } from 'weapp-tailwindcss-web
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import UniPagesTypes from 'vite-plugin-uni-pages-types'
-import path from 'path'
 
 // const isH5 = process.env.UNI_PLATFORM === 'h5'
 // const isApp = process.env.UNI_PLATFORM === 'app'
@@ -50,10 +49,11 @@ export default defineConfig({
     uni()
   ],
   resolve: {
-    alias: {
-      '@/': `${path.resolve(__dirname, 'src')}/`,
-      '@img/': `${path.resolve(__dirname, 'src/static/img')}/`
-    }
+    alias: [
+      { find: '@', replacement: '/src' },
+      { find: '@img', replacement: '/src/assets/img' },
+      { find: /^@(png|jpg|webp)(\/.*)/, replacement: '/src/assets/img' + '$2.$1' }
+    ]
   },
   css: {
     postcss: {

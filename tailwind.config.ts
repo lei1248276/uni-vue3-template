@@ -83,6 +83,24 @@ export default {
           type: 'length' // 可以根据需要调整类型
         }
       )
+
+      matchUtilities({
+        /**
+         * @description: 设置背景图片（简写方式）
+         * @example```md
+         * bg-img-[@png/xxx] => { backgroundImage: 'url(@/assets/xxx.png)' }
+         * bg-img-[@jpg/xxx] => { backgroundImage: 'url(@/assets/xxx.jpg)' }
+         * ```
+         */
+        'bg-img': (value) => {
+          const reg = /^@(png|jpg|webp|svg)(\/.*)/
+          const isPrefixImg = reg.test(value)
+          isPrefixImg && (value = value.replace(reg, '@/assets/img$2.$1'))
+          return {
+            backgroundImage: `url(${value})`
+          }
+        }
+      })
     })
   ]
 }
