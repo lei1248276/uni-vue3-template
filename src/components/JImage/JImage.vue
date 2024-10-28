@@ -1,12 +1,9 @@
 <template>
-  <div
-    class="relative overflow-hidden"
-    :style="{'width': width, 'height': height}"
-  >
+  <div class="relative h-[240rpx] w-[320rpx] overflow-hidden">
     <span
       v-if="!src || !loaded || isError"
       class="absolute inset-0 bg-[length:60%] bg-center bg-no-repeat"
-      :style="{'background-image': `url(${altImg})`}"
+      :style="`background-image: url(${altImg})`"
     />
 
     <image
@@ -137,15 +134,9 @@ const props = withDefaults(defineProps<{
    */
   draggable?: boolean;
 }>(), {
-  width: '320rpx',
-  height: '240rpx',
   altImg: alt,
-  preview: false,
-  lazyLoad: false,
   mode: 'aspectFit',
   fadeShow: true,
-  webp: false,
-  showMenuByLongpress: false,
   draggable: true
 })
 defineEmits<{

@@ -12,6 +12,25 @@
     />
 
     <slot v-if="$slots.default" />
+    <!-- #ifndef MP -->
+    <input
+      v-else-if="!$slots.default"
+      class="grow"
+      :class="inputClass"
+      :value="modelValue"
+      v-bind="$props"
+      @keyboardheightchange="$emit('keyboardheightchange', $event)"
+      @input="$emit('update:modelValue', $event.detail.value); $emit('input', $event)"
+      @blur="$emit('blur', $event)"
+      @focus="$emit('focus', $event)"
+      @confirm="validation
+        ? validation(modelValue)
+          ? ($emit('confirm', $event), $emit('validate', true))
+          : $emit('validate', false)
+        : $emit('confirm', $event)"
+    >
+    <!-- #endif -->
+    <!-- #ifdef MP -->
     <input
       v-else
       class="grow"
@@ -50,11 +69,16 @@
       :alwaysSystem="alwaysSystem"
       :inputMode="inputMode"
       @keyboardheightchange="$emit('keyboardheightchange', $event)"
-      @input="$emit('update:modelValue', ($event as any).detail.value); $emit('input', $event)"
+      @input="$emit('update:modelValue', $event.detail.value); $emit('input', $event)"
       @blur="$emit('blur', $event)"
       @focus="$emit('focus', $event)"
-      @confirm="validation ? (validation(modelValue) && $emit('confirm', $event)) : $emit('confirm', $event)"
+      @confirm="validation
+        ? validation(modelValue)
+          ? ($emit('confirm', $event), $emit('validate', true))
+          : $emit('validate', false)
+        : $emit('confirm', $event)"
     >
+    <!-- #endif -->
 
     <slot
       v-if="$slots.right"

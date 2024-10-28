@@ -1,7 +1,19 @@
 <template>
+  <!-- #ifndef MP -->
   <button
     class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-[28rpx] font-medium leading-none ring-offset-background transition-colors after:hidden"
-    :class="[variants.variant[props.variant], variants.size[props.size], props.disabled && 'pointer-events-none opacity-50']"
+    :class="[variants.variant[variant], variants.size[size], disabled && 'pointer-events-none opacity-50']"
+    hover-class="none"
+    v-bind="($props as ButtonProps)"
+  >
+    <slot />
+  </button>
+  <!-- #endif -->
+
+  <!-- #ifdef MP -->
+  <button
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-[28rpx] font-medium leading-none ring-offset-background transition-colors after:hidden"
+    :class="[variants.variant[variant], variants.size[size], disabled && 'pointer-events-none opacity-50']"
     hover-class="none"
     :loading="loading"
     :form-type="formType"
@@ -34,6 +46,7 @@
   >
     <slot />
   </button>
+  <!-- #endif -->
 </template>
 
 <script lang="ts">
@@ -73,11 +86,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue'
 import type { ButtonProps } from '@uni-helper/uni-app-types'
 
-const props = withDefaults(defineProps<Partial<{
-  class: HTMLAttributes['class']
+withDefaults(defineProps<Partial<{
   variant: keyof typeof variants.variant
   size: keyof typeof variants.size
 
