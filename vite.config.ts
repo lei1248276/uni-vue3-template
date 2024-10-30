@@ -44,7 +44,7 @@ export default defineConfig({
     Components({
       dirs: [
         'src/components/**',
-        'src/uni_modules/**'
+        'node_modules/@dcloudio/uni-ui/lib/**'
       ],
       dts: true
     }),
