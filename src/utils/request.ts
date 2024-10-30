@@ -1,9 +1,5 @@
-import Request from './luch-request'
-
-export const BASE_URL = import.meta.env.VITE_BASE_API
-
-const request = new Request({
-  baseURL: BASE_URL
+const request = useRequest.create({
+  baseURL: import.meta.env.VITE_BASE_API
 })
 
 request.interceptors.request.use(
