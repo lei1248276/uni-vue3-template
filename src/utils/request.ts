@@ -7,8 +7,9 @@ request.interceptors.request.use(
     // console.log('🚀 ~ file: request.ts:31 ~ config:', config)
     return config
   }, (err) => {
-    toast.fail()
-    return Promise.reject(err)
+    console.error(err)
+
+    return (toast.fail(), Promise.reject(err))
   })
 
 request.interceptors.response.use(
@@ -19,7 +20,7 @@ request.interceptors.response.use(
   }, (err) => {
     console.error(err)
 
-    return (toast.fail('请求失败'), Promise.reject(err))
+    return (toast.fail(), Promise.reject(err))
   })
 
 export default request

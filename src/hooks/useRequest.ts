@@ -37,7 +37,10 @@ function extend(context: Record<string, any>, source: Record<string, any>) {
 
 class SimpleAxios {
   defaults: DefaultConfig
-  interceptors
+  interceptors: {
+    request: Interceptors<RequestConfig>
+    response: Interceptors<Response>
+  }
   constructor(instanceConfig: DefaultConfig) {
     this.defaults = instanceConfig
     this.interceptors = {
@@ -50,29 +53,41 @@ class SimpleAxios {
     T extends Response,
     R = T
   >(config: RequestConfig): Promise<R> {
-    config = { ...this.defaults, ...config }
-    config.url = isExternal(config.url) ? config.url : config.baseURL + config.url
+    const mergedConfig = { ...this.defaults, ...config }
+    mergedConfig.url = isExternal(mergedConfig.url)
+      ? mergedConfig.url
+      : mergedConfig.baseURL + mergedConfig.url
 
-    const chain: [
-      InterceptorsHandler<any>['fulfilled'] | null,
-      InterceptorsHandler<any>['rejected'] | null
-    ] = [this.defaults?.adapter || dispatchRequest, null]
+    const requestInterceptors = this.interceptors.request.handlers
+    const responseInterceptors = this.interceptors.response.handlers
 
-    this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
-      chain.unshift(interceptor.fulfilled, interceptor.rejected)
-    })
+    const chain: Array<InterceptorsHandler<any>['fulfilled'] | InterceptorsHandler<any>['rejected'] | null> =
+      new Array(2 + (requestInterceptors.length + responseInterceptors.length) * 2)
 
-    this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
-      chain.push(interceptor.fulfilled, interceptor.rejected)
-    })
+    const defaultHandler = this.defaults?.adapter || dispatchRequest
+    let currentIndex = 0
 
-    let promise: Promise<any> = Promise.resolve(config)
-    let i = 0
-    while (i < chain.length) {
-      promise = promise.then(chain[i++], chain[i++])
+    for (let i = 0; i < requestInterceptors.length; i++) {
+      const interceptor = requestInterceptors[i]
+      chain[currentIndex++] = interceptor.fulfilled
+      chain[currentIndex++] = interceptor.rejected
     }
 
-    return promise as Promise<R>
+    chain[currentIndex++] = defaultHandler
+    chain[currentIndex++] = null
+
+    for (let i = 0; i < responseInterceptors.length; i++) {
+      const interceptor = responseInterceptors[i]
+      chain[currentIndex++] = interceptor.fulfilled
+      chain[currentIndex++] = interceptor.rejected
+    }
+
+    return chain.reduce((promise, handler, index) => {
+      if (!handler) return promise
+      return index % 2 === 0
+        ? promise.then(handler as InterceptorsHandler<RequestConfig | Response>['fulfilled'])
+        : promise.catch(handler)
+    }, Promise.resolve(mergedConfig)) as Promise<R>
   }
 
   get<
@@ -85,7 +100,7 @@ class SimpleAxios {
   post<
     T extends Response,
     R = T
-  >(url = '', data = {}, config: Omit<RequestConfig, 'url'> = {}) {
+  >(url = '', data: Record<string, any> = {}, config: Omit<RequestConfig, 'url'> = {}) {
     return this.request<T, R>({ method: 'POST', url, data, ...config })
   }
 
@@ -162,10 +177,6 @@ class Interceptors<TValue> {
 
   clear() {
     this.handlers = []
-  }
-
-  forEach(fn: (handler: InterceptorsHandler<TValue>) => void) {
-    this.handlers.forEach((v) => { fn(v) })
   }
 }
 
