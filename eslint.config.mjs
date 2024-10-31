@@ -7,13 +7,22 @@ import autoImportConfig from './.eslintrc-auto-import.json' with { type: 'json' 
 import globals from 'globals'
 
 export default [
+  {
+    ignores: [
+      'dist/**',
+      'public/**',
+      'src/assets/**',
+      'src/uni_modules/**',
+      'src/pages.d.ts'
+    ]
+  },
   ...pluginVue.configs['flat/essential'],
   ...pluginVue.configs['flat/recommended'],
   ...vueTsEslintConfig(),
   ...tailwind.configs['flat/recommended'],
 
   {
-    files: ['**/*.vue', '**/*.ts', '**/*.js', '**/*.mjs'],
+    files: ['**/*.vue', '**/*.nvue', '**/*.ts', '**/*.js', '**/*.mjs'],
     languageOptions: {
       parser: vueParser,
       parserOptions: {
@@ -37,13 +46,6 @@ export default [
         getCurrentPages: true
       }
     },
-    ignores: [
-      'dist',
-      'public',
-      'src/assets',
-      'src/uni_modules',
-      'src/pages.d.ts'
-    ],
 
     // https://github.com/vuejs/eslint-config-vue
     rules: {
@@ -160,7 +162,6 @@ export default [
       'no-octal-escape': 2,
       'no-path-concat': 2,
       'no-proto': 2,
-      'no-redeclare': 2,
       'no-regex-spaces': 2,
       'no-return-assign': [2, 'except-parens'],
       'no-self-assign': 2,
