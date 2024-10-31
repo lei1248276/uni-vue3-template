@@ -83,6 +83,24 @@ export default {
   }
   // #endif
 }
+
+const variants = {
+  variant: {
+    default: 'bg-primary text-primary-foreground active:bg-primary/80',
+    destructive: 'bg-destructive text-destructive-foreground active:bg-destructive/80',
+    outline: 'border border-input bg-background active:bg-accent active:text-accent-foreground',
+    secondary: 'bg-secondary text-secondary-foreground active:bg-secondary/80',
+    ghost: 'active:bg-accent active:text-accent-foreground',
+    link: 'text-primary underline-offset-4 active:underline'
+  },
+  size: {
+    default: 'h-10 px-4 py-2',
+    xs: 'h-7 rounded px-2',
+    sm: 'h-9 rounded-md px-3',
+    lg: 'h-11 rounded-md px-8',
+    icon: 'h-10 w-10'
+  }
+}
 </script>
 
 <script setup lang="ts">
@@ -351,22 +369,4 @@ defineEmits<{
   /** 监听跳转IM的成功回调 Open-type="im" 时有效 */
   (e: 'im', event: any): void
 }>()
-
-const variants = {
-  variant: {
-    default: 'bg-primary text-primary-foreground active:bg-primary/80',
-    destructive: 'bg-destructive text-destructive-foreground active:bg-destructive/80',
-    outline: 'border border-input bg-background active:bg-accent active:text-accent-foreground',
-    secondary: 'bg-secondary text-secondary-foreground active:bg-secondary/80',
-    ghost: 'active:bg-accent active:text-accent-foreground',
-    link: 'text-primary underline-offset-4 active:underline'
-  },
-  size: {
-    default: 'h-10 px-4 py-2',
-    xs: 'h-7 rounded px-2',
-    sm: 'h-9 rounded-md px-3',
-    lg: 'h-11 rounded-md px-8',
-    icon: 'h-10 w-10'
-  }
-}
 </script>
