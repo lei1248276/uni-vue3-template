@@ -15,6 +15,30 @@ const isWechat = process.env.UNI_PLATFORM === 'mp-weixin'
 // https://vitejs.dev/config/
 export default defineConfig({
   base: './',
+  resolve: {
+    alias: [
+      { find: '@', replacement: '/src' },
+      { find: '@img', replacement: '/src/assets/img' },
+      { find: /^@(png|jpg|webp)(\/.*)/, replacement: '/src/assets/img' + '$2.$1' }
+    ]
+  },
+  css: {
+    postcss: {
+      plugins: [
+        require('autoprefixer'),
+        require('tailwindcss'),
+        require('postcss-rem-to-responsive-pixel')({
+          rootValue: 32,
+          propList: ['*'],
+          transformUnit: 'rpx'
+        })
+      ]
+    }
+  },
+  build: {
+    target: 'es2018',
+    reportCompressedSize: false
+  },
   plugins: [
     UniPagesTypes(),
     RemoveConsole(), //* 移除所有 console 仅在生产环境（主要为了解决uniapp App打包，使用esbuild配置无效）
@@ -49,25 +73,5 @@ export default defineConfig({
       dts: true
     }),
     uni()
-  ],
-  resolve: {
-    alias: [
-      { find: '@', replacement: '/src' },
-      { find: '@img', replacement: '/src/assets/img' },
-      { find: /^@(png|jpg|webp)(\/.*)/, replacement: '/src/assets/img' + '$2.$1' }
-    ]
-  },
-  css: {
-    postcss: {
-      plugins: [
-        require('autoprefixer'),
-        require('tailwindcss'),
-        require('postcss-rem-to-responsive-pixel')({
-          rootValue: 32,
-          propList: ['*'],
-          transformUnit: 'rpx'
-        })
-      ]
-    }
-  }
+  ]
 })
