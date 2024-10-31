@@ -1,7 +1,7 @@
 <template>
   <span
     class="iconfont bg-full inline-block size-[32rpx] text-[32rpx]"
-    :class="icon?.startsWith('icon-') ? icon : undefined"
+    :class="icon.startsWith('icon-') ? icon : undefined"
     :style="!icon || icon.startsWith('icon-') ? undefined : `background-image: url(${icon})`"
   >
     <slot v-if="$slots.default" />
@@ -20,8 +20,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-defineProps<{
-  /** 可以为字体图标 `icon-${string}` 或图片路径 */
+withDefaults(defineProps<{
   icon: `icon-${string}` | string
-}>()
+}>(), {
+  icon: ''
+})
 </script>

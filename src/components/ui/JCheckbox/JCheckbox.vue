@@ -49,7 +49,12 @@ withDefaults(defineProps<{
   /** 标签类名 */
   labelClass?: string
 }>(), {
-  icon: 'icon-radio'
+  modelValue: false,
+  label: '',
+  disabled: false,
+  icon: 'icon-radio',
+  iconClass: '',
+  labelClass: ''
 })
 
 defineEmits<{

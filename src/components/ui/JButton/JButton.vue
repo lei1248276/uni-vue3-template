@@ -168,12 +168,15 @@ withDefaults(defineProps<Partial<{
    * OpenProfile 触发打开用户主页
    */
   openType: ButtonProps['openType'];
+  // #ifdef MP-WEIXIN || MP-QQ
   /**
    * 打开 APP 时，向 APP 传递的参数
    *
    * Open-type="launchApp" 时有效
    */
   appParameter: string;
+  // #endif
+  // #ifdef MP-WEIXIN
   /**
    * 指定是否阻止本节点的祖先节点出现点击态
    *
@@ -232,6 +235,8 @@ withDefaults(defineProps<Partial<{
    * 默认为 false
    */
   showMessageCard: boolean;
+  // #endif
+  // #ifdef MP-QQ
   /**
    * 打开群资料卡时，传递的群号
    *
@@ -250,9 +255,70 @@ withDefaults(defineProps<Partial<{
    * Open-type="openPublicProfile" 时有效
    */
   publicId: string;
+  // #endif
+  // #ifdef MP-TOUTIAO
+  /**
+   * 客服的抖音号
+   *
+   * Open-type="im" 时有效
+   */
+  dataImId: string
+  /**
+   * IM卡片类型
+   *
+   * Open-type="im" 时有效
+   */
+  dataImType: string
+  /**
+   * 商品的id，仅支持泛知识课程库和生活服务商品库中的商品
+   *
+   * Open-type="im" 时有效
+   */
+  dataGoodsId: string
+  /**
+   * 订单的id，仅支持交易2.0订单
+   *
+   * Open-type="im" 时有效
+   */
+  dataOrderId: string
+  /**
+   * 商品类型，“1”代表生活服务，“2”代表泛知识。
+   *
+   * Open-type="im" 时有效
+   */
+  dataBizLine: string
+  // #endif
 }>>(), {
   variant: 'default',
-  size: 'default'
+  size: 'default',
+  disabled: false,
+  loading: false,
+  formType: undefined,
+  openType: undefined,
+  // #ifdef MP-WEIXIN || MP-QQ
+  appParameter: undefined,
+  // #endif
+  // #ifdef MP-WEIXIN
+  hoverStopPropagation: false,
+  lang: 'en',
+  sessionFrom: undefined,
+  sendMessageTitle: undefined,
+  sendMessagePath: undefined,
+  sendMessageImg: undefined,
+  showMessageCard: false,
+  // #endif
+  // #ifdef MP-QQ
+  groupId: undefined,
+  guildId: undefined,
+  publicId: undefined,
+  // #endif
+  // #ifdef MP-TOUTIAO
+  dataImId: undefined,
+  dataImType: undefined,
+  dataGoodsId: undefined,
+  dataOrderId: undefined,
+  dataBizLine: undefined
+  // #endif
 })
 
 defineEmits<{

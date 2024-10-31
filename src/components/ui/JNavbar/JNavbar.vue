@@ -127,9 +127,15 @@ withDefaults(defineProps<{
   /** 是否使用 cover-view */
   isCoverView?: boolean
 }>(), {
+  title: '',
+  titleClass: '',
+  leftArrow: false,
+  arrowClass: '',
   leftIcon: iconBack,
   color: '#333',
-  backgroundColor: '#fff'
+  backgroundColor: '#fff',
+  fixed: false,
+  isCoverView: false
 })
 
 const statusBarHeight = useSystemInfo().statusBarHeight

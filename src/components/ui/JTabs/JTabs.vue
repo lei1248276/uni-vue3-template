@@ -67,6 +67,8 @@ const props = withDefaults(defineProps<{
   /** tab的根元素class类 */
   tabContainerClass?: string
 }>(), {
+  tabs: () => [],
+  current: 0,
   tabClass: '',
   tabActiveClass: '',
   tabContainerClass: ''

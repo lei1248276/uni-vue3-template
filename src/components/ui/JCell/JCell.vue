@@ -46,7 +46,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-defineProps<{
+withDefaults(defineProps<{
   /** 可以是图片或字体图标，字体图标要求'icon-${string}'格式 */
   icon?: string
   /** 标题 */
@@ -59,5 +59,12 @@ defineProps<{
   arrowClass?: string
   /** 标题样式 */
   titleClass?: string
-}>()
+}>(), {
+  icon: '',
+  arrow: false,
+  title: '',
+  iconClass: '',
+  arrowClass: '',
+  titleClass: ''
+})
 </script>

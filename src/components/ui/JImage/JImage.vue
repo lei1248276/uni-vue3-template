@@ -56,10 +56,6 @@ import type { ImageProps } from '@uni-helper/uni-app-types'
 import alt from './img/alt.png'
 
 const props = withDefaults(defineProps<{
-  /** 宽度 */
-  width?: string
-  /** 高度 */
-  height?: string
   /** 图片类名 */
   imgClass?: string
   /** 是否预览图片 */
@@ -134,9 +130,15 @@ const props = withDefaults(defineProps<{
    */
   draggable?: boolean;
 }>(), {
+  src: '',
+  imgClass: '',
   altImg: alt,
   mode: 'aspectFit',
+  preview: false,
+  lazyLoad: false,
   fadeShow: true,
+  webp: false,
+  showMenuByLongpress: false,
   draggable: true
 })
 defineEmits<{
