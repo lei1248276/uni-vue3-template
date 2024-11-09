@@ -41,3 +41,17 @@ export const chunk = <T>(arr: T[], size: number): T[][] => {
   }
   return res
 }
+
+/**
+ * 错误捕获
+ * @example
+ * ```ts
+ * const [err, res] = await catchError(fetchData())
+ * if (err) console.error(err)
+ * ```
+ * */
+export const catchError = async <T>(promise: Promise<T>): Promise<[undefined, T] | [Error]> => {
+  return promise
+    .then((res) => [undefined, res] as [undefined, T])
+    .catch((err) => [err])
+}
